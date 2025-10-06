@@ -1,0 +1,26 @@
+<?php require 'views/header.html'; ?>
+
+<h3>My Todos</h3>
+<?php foreach($todos as $todo) { ?>
+<article>
+    <header>
+        <small>Due: <?=$todo->formatDueDate();?></small>
+    </header>
+    <div style="display: flex; justify-content: space-between; align-items: center;">
+        <h3><?=$todo->description;?></h3>
+        <?php
+            $color = $todo->isCompleted ? 'green' : 'red';
+            $status = $todo->isCompleted ? 'Completed' : 'Pending';
+        ?>
+        <span class="badge" style="background-color: <?=$color;?>; color: white; padding: 0.25rem 0.5rem; border-radius: 0.25rem;">
+            <?=$status;?>
+        </span>
+    </div>
+    <div>
+        <a href="edit.php?id=<?=$todo->id?>">Edit</a>
+        <a href="delete.php?id=<?=$todo->id?>" onclick="return confirm('Are you sure?')">Delete</a>
+    </div>
+</article>
+<?php } ?>
+
+<?php require 'views/footer.html'; ?>
